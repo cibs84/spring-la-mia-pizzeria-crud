@@ -1,5 +1,9 @@
 package com.corsojava.pizzeria.repository;
 
-public interface PizzaRepository extends PizzaRepository<Pizza, Integer> {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.corsojava.pizzeria.models.Pizza;
+
+public interface PizzaRepository extends JpaRepository<Pizza, Integer> {
 
 }

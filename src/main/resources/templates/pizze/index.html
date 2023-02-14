@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Pizze</title>
+
+<th:block th:replace="~{fragments :: head}"></th:block>
+</head>
+<body>
+	<h1 class="text-center my-5">Pizze</h1>
+	<h2 class="text-center my-5" th:unless="${pizze.size() > 0}">Non ci sono pizze disponibili</h2>
+	<table th:if="${pizze.size() > 0}" class="table table-hover align-middle container">
+		<thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Nome</th>
+		      <th scope="col">Descrizione</th>
+		      <th scope="col">Prezzo</th>
+		      <th scope="col">Foto</th>
+		    </tr>
+  		</thead>
+	  	<tbody>
+		    <tr th:each="pizza : ${pizze}">
+		      <th>[[${pizza.id}]]</th>
+		      <td>[[${pizza.name}]]</td>
+		      <td>[[${pizza.description}]]</td>
+		      <td>€ [[${pizza.price}]]</td>
+		      <td><img th:src="@{${pizza.photo}}" width="100"></td>
+		    </tr>
+	  	</tbody>
+	</table>
+</body>
+</html>
