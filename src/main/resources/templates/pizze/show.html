@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Pizza</title>
+
+<th:block th:replace="~{fragments :: head}"></th:block>
+</head>
+<body>
+	<main class="container">
+		<a th:href="@{/}" class="my-3 d-inline-block btn btn-outline-primary">Torna alla Home</a>
+		<h1 th:text="${pizza.name}" class="text-center my-5"></h1>
+		<div class="row">
+			<div class="mx-auto col-6">
+				<img th:alt="|Immagine Pizza ${pizza.name}|" th:src="@{${pizza.photo}}" class="mb-3" width="100%">
+				<h4>Ingredienti</h4>
+				<p>[[${pizza.description}]]</p>
+			</div>
+		</div>
+	</main>
+	
+	<!-- Scripts -->
+	<div th:replace="~{fragments :: scripts}"></div>
+</body>
+</html>
