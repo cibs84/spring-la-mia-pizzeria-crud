@@ -7,6 +7,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "pizza")
@@ -15,9 +20,24 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotNull(message = "Il campo Nome deve essere compilato")
+	@NotEmpty(message = "Il campo Nome deve essere compilato")
+	@Size(max = 30, message = "Inserire massimo 30 caratteri")
 	private String name;
+	
+	@NotNull(message = "Il campo Descrizione deve essere compilato")
+	@NotEmpty(message = "Il campo Descrizione deve essere compilato")
+	@Size(max = 100, message = "Inserire massimo 100 caratteri")
 	private String description;
+	
+	@NotNull(message = "Il campo Immagine deve essere compilato")
+	@NotEmpty(message = "Il campo Immagine deve essere compilato")
+	@Size(max = 200, message = "Inserire massimo 200 caratteri")
 	private String photo;
+	
+	@NotNull(message = "Il campo Prezzo deve essere compilato")
+	@DecimalMax(value = "99.99", message = "Il prezzo massimo è €99.99")
+	@DecimalMin(value = "1.00", message = "Il prezzo minimo è €1")
 	private BigDecimal price;
 	
 	public Integer getId() {
