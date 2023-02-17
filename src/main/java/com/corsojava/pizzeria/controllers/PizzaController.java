@@ -3,8 +3,8 @@ package com.corsojava.pizzeria.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,7 +37,7 @@ public class PizzaController {
 		if (keyword!=null && !keyword.isEmpty()) {
 			elencoPizze = pizzaRepository.findByNameLike(keyword + "%");
 		} else {
-			elencoPizze = pizzaRepository.findAll();
+			elencoPizze = pizzaRepository.findAll(Sort.by("name"));
 		}
 		
 		// List<Pizza> elencoPizze = pizzaRepository.findByNameLike("Ma%"); // ritorna tutte le pizze che iniziano con 'Ma'
@@ -88,6 +88,36 @@ public class PizzaController {
 //			System.out.println(e.getMessage());
 //			e.printStackTrace();
 		}
+		
+		return "redirect:/pizze";
+	}
+	
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable("id") Integer id, Model model) {
+		Pizza pizza = pizzaRepository.getReferenceById(id);
+		model.addAttribute("pizza", pizza);
+		return "pizze/edit";
+	}
+	
+	@PostMapping("/update/{id}")
+	public String update(
+			@Valid @ModelAttribute Pizza formPizza,
+			BindingResult bindingResult,
+			Model model) {
+		
+		if (bindingResult.hasErrors()) {
+			return "pizze/edit";
+		}
+		
+		pizzaRepository.save(formPizza);
+		
+		return "redirect:/pizze/" + formPizza.getId();
+	}
+	
+	@PostMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Integer id) {
+		
+		pizzaRepository.deleteById(id);
 		
 		return "redirect:/pizze";
 	}
