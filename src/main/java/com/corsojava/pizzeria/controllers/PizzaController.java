@@ -3,6 +3,7 @@ package com.corsojava.pizzeria.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,14 +70,24 @@ public class PizzaController {
 	@PostMapping("/store")
 	public String store(
 			@Valid @ModelAttribute("pizza") Pizza formPizza,
-			BindingResult bindingResult,
-			Model model) {
+			BindingResult bindingResult) {
 		
 		if (bindingResult.hasErrors()) {
 			return "/pizze/create";
 		}
 		
-		pizzaRepository.save(formPizza);
+		try {
+			pizzaRepository.save(formPizza);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("*** Errore SQL !!! ***");
+			System.out.println("*** Errore SQL !!! ***");
+			System.out.println("*** Errore SQL !!! ***");
+			System.out.println("*** Errore SQL !!! ***");
+			System.out.println("*** Errore SQL !!! ***");
+//			System.out.println(e.getMessage());
+//			e.printStackTrace();
+		}
 		
 		return "redirect:/pizze";
 	}

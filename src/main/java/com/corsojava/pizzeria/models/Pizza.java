@@ -2,6 +2,7 @@ package com.corsojava.pizzeria.models;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,21 +24,25 @@ public class Pizza {
 	@NotNull(message = "Il campo Nome deve essere compilato")
 	@NotEmpty(message = "Il campo Nome deve essere compilato")
 	@Size(max = 30, message = "Inserire massimo 30 caratteri")
+	@Column(nullable=false, length=30)
 	private String name;
 	
 	@NotNull(message = "Il campo Descrizione deve essere compilato")
 	@NotEmpty(message = "Il campo Descrizione deve essere compilato")
 	@Size(max = 100, message = "Inserire massimo 100 caratteri")
+	@Column(nullable=false, length=100)
 	private String description;
 	
 	@NotNull(message = "Il campo Immagine deve essere compilato")
 	@NotEmpty(message = "Il campo Immagine deve essere compilato")
 	@Size(max = 200, message = "Inserire massimo 200 caratteri")
+	@Column(nullable=false, length=200)
 	private String photo;
 	
 	@NotNull(message = "Il campo Prezzo deve essere compilato")
 	@DecimalMax(value = "99.99", message = "Il prezzo massimo è €99.99")
 	@DecimalMin(value = "1.00", message = "Il prezzo minimo è €1")
+	@Column(nullable=false, precision=4, scale=2)
 	private BigDecimal price;
 	
 	public Integer getId() {
