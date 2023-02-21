@@ -44,7 +44,7 @@
 		  
 			<!--  Immagine -->
 	    	<label for="photo" class="form-label">Immagine</label>
-	    	<input type="text" th:field="*{photo}" maxlength="200" class="form-control" id="photo" th:errorClass="is-invalid">
+	    	<input type="text" th:field="*{photo}" maxlength="400" class="form-control" id="photo" th:errorClass="is-invalid">
 		  	<!-- Validation Error -->
 		  	<div th:if="${#fields.hasErrors('photo')}" class="invalid-feedback">
 		  		<ul>

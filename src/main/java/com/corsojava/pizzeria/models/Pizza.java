@@ -22,10 +22,6 @@ public class Pizza {
 	private Integer id;
 	
 	@NotNull(message = "Il campo Nome deve essere compilato")
-	@NotEmpty(message = "Il campo Nome deve essere compilato")
-	@Size(max = 30, message = "Inserire massimo 30 caratteri")
-	@Column(nullable=false, length=30)
-	private String name;
 	
 	@NotNull(message = "Il campo Descrizione deve essere compilato")
 	@NotEmpty(message = "Il campo Descrizione deve essere compilato")
@@ -33,10 +29,15 @@ public class Pizza {
 	@Column(nullable=false, length=100)
 	private String description;
 	
+	@NotEmpty(message = "Il campo Nome deve essere compilato")
+	@Size(max = 30, message = "Inserire massimo 30 caratteri")
+	@Column(nullable=false, length=30)
+	private String name;
+	
 	@NotNull(message = "Il campo Immagine deve essere compilato")
 	@NotEmpty(message = "Il campo Immagine deve essere compilato")
-	@Size(max = 200, message = "Inserire massimo 200 caratteri")
-	@Column(nullable=false, length=200)
+	@Size(max = 400, message = "Inserire massimo 400 caratteri")
+	@Column(nullable=false, length=400)
 	private String photo;
 	
 	@NotNull(message = "Il campo Prezzo deve essere compilato")
